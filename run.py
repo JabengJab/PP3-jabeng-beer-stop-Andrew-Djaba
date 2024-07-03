@@ -20,14 +20,13 @@ def get_sales_data():
     by commas. The loop will repeatedly request data, until it is valid.
     """
     while True: 
-        print("please enter sales data from the last market.")
+        print("Please enter sales data from the last market.")
         print("Data should be six numbers, separated by commas.")
         print("Example: 10, 20, 30, 40, 50, 60\n")
 
         data_str = input("Enter your data here:\n")
-   
         sales_data = data_str.split(",")
-        validate_data(sales_data)
+        
 
         if validate_data(sales_data):
             print("Data is valid!")
@@ -82,7 +81,7 @@ def calculate_surplus_data(sales_row):
    
     surplus_data = []
     for stock, sales in zip(stock_row, sales_row):
-        surplus = int(stock) - sales
+        surplus = int(stock) - int(sales)
         surplus_data.append(surplus)
 
     return surplus_data
@@ -119,7 +118,19 @@ def calculate_stock_data(data):
 
     return new_stock_data    
 
-        
+
+def get_stock_values(stock_values):
+    """
+    Retrieve beer type headings from the 'stock' worksheet and build a dictionary
+    with the headings as keys and stock_values as values.
+    """
+    print("Getting stock values...\n")
+    stock_sheet = SHEET.worksheet('stock')
+    headings = stock_sheet.row_values(1)  # Get the first row as headings
+
+    stock_dict = {heading: value for heading, value in zip(headings, stock_values)}
+    
+    return stock_dict        
 
 
 def main():
@@ -137,9 +148,9 @@ def main():
     update_worksheet(stock_data, "stock")
     
 
+    stock_dict = get_stock_values(stock_data)
+    print("Stock values dictionary:", stock_dict)
 
 print("Welcome to Jabeng Beer Stop Data Automation")
 main()
 
-
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
