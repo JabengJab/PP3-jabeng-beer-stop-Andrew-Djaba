@@ -1,32 +1,68 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Jabeng Beer Stop Data Automation
 
-Welcome,
+## Overview
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
+The Jabeng Beer Stop Data Automation project is designed to streamline the process of collecting and managing sales data for a beer store. The program automates data entry, calculates surplus, updates stock levels, and provides stock recommendations for six beer types.
 
-## Reminders
+## Features
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+* Collect Sales Data: Prompt the user to enter sales data for six different beer types.
 
-## Creating the Heroku app
+* Validate Input: Ensure that the input data is valid and correctly formatted.
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+* Update Worksheets: Append sales and surplus data to the relevant Google Sheets worksheets.
 
-1. `heroku/python`
-2. `heroku/nodejs`
+* Calculate Surplus: Determine the surplus for each beer type based on sales and stock data.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+* Calculate Stock Levels: Compute new stock levels based on average sales from the last five markets.
 
-Connect your GitHub repository and deploy as normal.
 
-## Constraints
+* Retrieve and Display Stock Values: Fetch beer type headings and current stock values, displaying them in a user-friendly format.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
----
+## Requirements
 
-Happy coding!
+* Python 3.x
+
+* `gspread` library
+
+* `google-auth` library
+
+* Google Cloud project with Google Sheets API enabled
+
+* `creds.json`  file containing your Google Cloud credentials
+
+
+## Setup
+
+1. Clone the repository:
+
+2. Install dependencies:
+   `pip install gspread google-auth`
+
+3. Setup Google Cloud credentials:
+   
+    *   Ensure you have a `creds.json` file with your Google Cloud credentials.
+    *   Place this file in the project root directory.
+
+4. Create and configure Google Sheets:
+
+   * Create a Google Sheet named `jabeng_beer_stop`.
+   * Create worksheets named ``sales``, ``surplus``, and ``stock``.
+   * Ensure the first row of the ``stock`` worksheet contains beer type headings.
+
+## Usage
+
+Run the script by executing the following command:
+
+``python run.py``
+
+
+
+
+
+
+
+
+
