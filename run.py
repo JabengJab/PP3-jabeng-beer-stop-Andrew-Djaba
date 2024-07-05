@@ -1,16 +1,18 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('jabeng_beer_stop')
+
 
 def get_sales_data():
     """
@@ -19,20 +21,19 @@ def get_sales_data():
     via the terminal, which must be a string of 6 numbers separated
     by commas. The loop will repeatedly request data, until it is valid.
     """
-    while True: 
+    while True:
         print("Please enter sales data from the last market.")
         print("Data should be six numbers, separated by commas.")
         print("Example: 10, 20, 30, 40, 50, 60\n")
 
         data_str = input("Enter your data here:\n")
         sales_data = data_str.split(",")
-        
 
         if validate_data(sales_data):
             print("Data is valid!")
             break
 
-    return     sales_data
+    return sales_data
 
 
 def validate_data(values):
@@ -40,7 +41,7 @@ def validate_data(values):
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 6 values.
-    """ 
+    """
 
     try:
         [int(value) for value in values]
@@ -49,11 +50,10 @@ def validate_data(values):
                 f"Exactly 6 values required, you provided {len(values)}"
             )
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")       
+        print(f"Invalid data: {e}, please try again.\n")
         return False
 
-    return True    
-  
+    return True
 
 
 def update_worksheet(data, worksheet):
@@ -64,7 +64,7 @@ def update_worksheet(data, worksheet):
     print(f"Updating {worksheet} worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
-    print(f"{worksheet} worksheet updated successfully\n")    
+    print(f"{worksheet} worksheet updated successfully\n")
 
 
 def calculate_surplus_data(sales_row):
@@ -78,7 +78,7 @@ def calculate_surplus_data(sales_row):
     print("Calculating surplus data...\n")
     stock = SHEET.worksheet("stock").get_all_values()
     stock_row = stock[-1]
-   
+
     surplus_data = []
     for stock, sales in zip(stock_row, sales_row):
         surplus = int(stock) - int(sales)
@@ -93,7 +93,7 @@ def get_last_5_entries_sales():
     the last 5 entries for each sandwich and returns the data
     as a list of lists.
     """
-    sales = SHEET.worksheet("sales")    
+    sales = SHEET.worksheet("sales")
 
     columns = []
     for ind in range(1, 7):
@@ -106,7 +106,7 @@ def get_last_5_entries_sales():
 def calculate_stock_data(data):
     """
      Calculate the average stock for each item type, adding 10%
-    """    
+    """
     print("Calculating stock data...\n")
     new_stock_data = []
 
@@ -116,7 +116,7 @@ def calculate_stock_data(data):
         stock_num = average * 1.1
         new_stock_data.append(round(stock_num))
 
-    return new_stock_data    
+    return new_stock_data
 
 
 def get_stock_values(stock_values):
@@ -128,17 +128,18 @@ def get_stock_values(stock_values):
     stock_sheet = SHEET.worksheet('stock')
     headings = stock_sheet.row_values(1)  # Get the first row as headings
 
-    stock_dict = {heading: value for heading, value in zip(headings, stock_values)}
-    
-    return stock_dict        
+    stock_dict = {heading: value for heading,
+                  value in zip(headings, stock_values)}
+
+    return stock_dict
 
 
 def main():
     """ 
     Run alll program functions
-    """ 
+    """
 
-    data = get_sales_data()   
+    data = get_sales_data()
     sales_data = [int(num) for num in data]
     update_worksheet(sales_data, "sales")
     new_surplus_data = calculate_surplus_data(sales_data)
@@ -146,11 +147,10 @@ def main():
     sales_columns = get_last_5_entries_sales()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
-    
 
     stock_dict = get_stock_values(stock_data)
     print("Stock values dictionary:", stock_dict)
 
+
 print("Welcome to Jabeng Beer Stop Data Automation")
 main()
-

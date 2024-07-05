@@ -1,8 +1,38 @@
 # Jabeng Beer Stop Data Automation
 
-## Overview
+## Table of Contents
 
-The Jabeng Beer Stop Data Automation project is designed to streamline the process of collecting and managing sales data for a beer store. The program automates data entry, calculates surplus, updates stock levels, and provides stock recommendations for six beer types.
+- [Purpose](#purpose)
+- [Features](#features)
+  * ##### [Collect Sales Data](#collect-sales-data)
+  * ##### [Validate Input](#validate-input)
+  * ##### [Update Worksheets](#update-worksheets)
+  * ##### [Calculate Surplus](#calculate-surplus)
+  * ##### [Calculate Stock Levels](#calculate-stock-levels)
+  * ##### [Retrieve and Display Stock Values](#retrieve-and-display-stock-values)
+
+- [Technologies Used](#technologies-used)
+- [Requirements](#requirements)
+- [Setup](#setup)
+  * ##### [Clone the Repository](#clone-the-repository)
+  * ##### [Install Dependencies](#install-dependencies)
+  * ##### [Setup Google Cloud Credentials](#setup-google-cloud-credentials)
+  * ##### [Create and configure Google Sheets](#create-and-configure-google-sheets)
+
+- [Usage](#usage)
+  * [Programm Flow](#program-flow)
+- [Functions](#functions)
+- [Flowchart](#flowchart)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Acknowledgements](#acknowledgements)
+
+## Purpose
+
+The Jabeng Beer Stop Data Automation project is designed to streamline the process of collecting and managing sales data of six types of beers for a beer store. The program automates data entry, calculates surplus, updates stock levels, and provides stock recommendations for six beer types.
+
+
+The purpose of this programm 
 
 ## Features
 
@@ -27,6 +57,18 @@ The Jabeng Beer Stop Data Automation project is designed to streamline the proce
   Fetch beer type headings and current stock values, displaying them in a user-friendly format.
 
 
+## Technologies Used
+
+* Python - used to provide functionality to the app.
+
+* [Google Sheets](https://workspace.google.com/products/sheets/) - used to host application data
+
+* [Gitpod](https://www.gitpod.io/) - used to create code and content for the repository.
+
+* [Github](https://github.com/) - used to host the repository
+
+* [draw.io](https://app.diagrams.net/) - used to create the flowchart in the planning stages. 
+
 ## Requirements
 
 * Python 3.x
@@ -42,7 +84,7 @@ The Jabeng Beer Stop Data Automation project is designed to streamline the proce
 
 ## Setup
 
-1. #### Clone the repository:
+1. #### Clone the repository.
 
 2. #### Install dependencies:
    `pip install gspread google-auth`
@@ -117,14 +159,47 @@ Run the script by executing the following command:
 
 ![Flowchart](images/flow.webp) 
 
+
+## Testing
+
+I checked my code by installing pep8 `pip3 install autopep8` and got no errors after testing. 
+
+I also checked my code again on [Python code checker](https://www.pythonchecker.com/) with no errors to report. 
+
+
+## Deployment
+* The project was deployed to [heroku](https://www.heroku.com/). First we create a new app on the Heroku Dashboard.
+
+* After the App is created, head over to the settings tab and create a Config Var and add a KEY called CREDS and its contents as it's VALUE. The template code used will use this information to create a file called creds.json and write  this data into it as the application is built. 
+
+![Settings](images/settings.PNG)
+![config_var](images/config_var.PNG)
+
+* The next step is to add a couple of  buildpacks to the application.
+Scroll down and click the “Add buildpack” here. Select Python as the first  buildpack and then select node.js as the next buildpack to handle the mock terminal.
+
+![Buildpacks](images/Buildpacks.PNG)
+
+* Next we select the deploy tab to choose the method with which we want to deploy.
+
+* Select Github and confirm that we want to connect.
+
+![Github_deploy](images/deploy.PNG)
+
+
+* Search for the repository name and connect
+
+
+
 ## Acknowledgments
 
 * [gspread](https://github.com/burnash/gspread)
 
 * [Google Auth Library](https://github.com/googleapis/google-auth-library-python)
 
-* [Love Sandwiches Walkthrough project by Code Institue](https://codeinstitute.net/de/bildungsgutschein/?utm_term=code%20institute&utm_campaign=CI+-+UK+-+Search+-+Brand&utm_source=adwords&utm_medium=ppc&hsa_acc=8983321581&hsa_cam=16493764737&hsa_grp=132915436966&hsa_ad=635790877675&hsa_src=g&hsa_tgt=kwd-319867646331&hsa_kw=code%20institute&hsa_mt=e&hsa_net=adwords&hsa_ver=3&gad_source=1&gclid=CjwKCAjwkJm0BhBxEiwAwT1AXCtob-PbSn5lAkWit6WjFFFEkw4e4y1DEKxIMf1l35xG_lvO4eU_IBoCcsQQAvD_BwE)
+* [Love Sandwiches Walkthrough project by Code Institute](https://bit.ly/3zyJce8) 
 
+* [Code Institue](https://bit.ly/3zyJce8) Tutor Assisstant
 
 
 
