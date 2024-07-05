@@ -1,4 +1,8 @@
 # Jabeng Beer Stop Data Automation
+Link to deployed App [Jabenb Beer Stop Data Automation App](https://jabeng-beer-stop-ad65264e25e6.herokuapp.com/)
+
+Link to [Github Repository](https://github.com/JabengJab/PP3-jabeng-beer-stop-Andrew-Djaba)
+
 
 ## Table of Contents
 
@@ -195,6 +199,8 @@ I also checked my code again on [Python code checker](https://www.pythonchecker.
 
 ## Deployment
 * The project was deployed to [heroku](https://www.heroku.com/). First we create a new app on the Heroku Dashboard.
+
+Here is the deployed link [Jabenb Beer Stop Data Automation App](https://jabeng-beer-stop-ad65264e25e6.herokuapp.com/)
 
 * After the App is created, head over to the settings tab and create a Config Var and add a KEY called CREDS and its contents as it's VALUE. The template code used will use this information to create a file called creds.json and write  this data into it as the application is built. 
 
